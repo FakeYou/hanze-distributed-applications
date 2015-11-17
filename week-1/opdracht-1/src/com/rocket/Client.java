@@ -29,11 +29,17 @@ public class Client {
             while((response = in.readLine()) != null) {
                 System.out.println("Server: " + response);
 
+                if(response.equals("bye")) {
+                    this.socket.close();
+                    break;
+                }
+
                 request = this.consoleIn.readLine();
                 if(request != null) {
                     System.out.println("Client: " + request);
                     out.println(request);
                 }
+
             }
 
         } catch (IOException e) {

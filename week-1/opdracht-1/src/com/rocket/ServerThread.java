@@ -15,19 +15,23 @@ public class ServerThread extends Thread {
     }
 
     public void run() {
-        Protocol protocol = new Protocol();
-        protocol.state = Protocol.State.WAITING;
+        this.protocol = new Protocol();
+        this.protocol.state = Protocol.State.WAITING;
 
         try {
             this.out = new PrintWriter(socket.getOutputStream(), true);
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out.println(protocol.protocol());
+            out.println(this.protocol.protocol());
 
             String input;
             while((input = this.in.readLine()) != null) {
-                out.println(protocol.protocol(input));
+                if(this.protocol.state == Protocol.State.CLOSING) {
+                    socket.close();
+                    break;
+                }
+
+                out.println(this.protocol.protocol(input));
             }
-            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

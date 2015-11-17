@@ -29,9 +29,9 @@ public class Protocol {
     public enum State {
         WAITING,
         TRANSLATETOENGLISH,
-        TRANSLATETODUTCH
+        TRANSLATETODUTCH,
+        CLOSING
     }
-
 
     public String translateEnglishToDutch(String input) {
         String[] words = input.split(" ");
@@ -87,6 +87,10 @@ public class Protocol {
                 else if(input.toLowerCase().equals("english")) {
                     output = "ready to translate from english to dutch.";
                     this.state = State.TRANSLATETOENGLISH;
+                }
+                else if(input.equals("EXIT")) {
+                    output = "bye";
+                    this.state = state.CLOSING;
                 }
                 else {
                     output = "Do you want to translate from dutch or english? (type SWITCH to switch languages)";
