@@ -1,3 +1,4 @@
+package com.rocket;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -5,16 +6,16 @@ import java.net.ServerSocket;
 public class Server {
 
     private static String[][] translations = {
-        {"hello", "hallo"},
-        {"house", "huis"},
-        {"car", "auto"},
-        {"tree", "boom"},
-        {"dog", "hond"},
-        {"bomb", "bom"},
-        {"refrigerator", "koelkast"},
-        {"cow", "koe"},
-        {"water", "water"},
-        {"bike", "fiets"}
+            {"hello", "hallo"},
+            {"house", "huis"},
+            {"car", "auto"},
+            {"tree", "boom"},
+            {"dog", "hond"},
+            {"bomb", "bom"},
+            {"refrigerator", "koelkast"},
+            {"cow", "koe"},
+            {"water", "water"},
+            {"bike", "fiets"}
     };
 
     private enum State {
@@ -27,6 +28,8 @@ public class Server {
     public Server(int port) {
         this.state = State.IDLE;
 
+        System.out.println("Starting server");
+
         try {
             this.socket = new ServerSocket(port);
             System.out.println("Started server on port: " + port);
@@ -36,8 +39,7 @@ public class Server {
         }
     }
 
-    public static void Main() {
+    public static void main(String[] args) {
         new Server(4000);
     }
 }
-
