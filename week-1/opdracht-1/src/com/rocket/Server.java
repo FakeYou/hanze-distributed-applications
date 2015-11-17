@@ -1,11 +1,14 @@
 package com.rocket;
 
+import com.sun.deploy.util.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server {
 
@@ -27,8 +30,8 @@ public class Server {
 
     private enum State {
         WAITING,
-        TRANSLATESENTENCE,
-        TRANSLATEWORD
+        TRANSLATETOENGLISH,
+        TRANSLATETODUTCH
     };
 
     private State state;
@@ -68,27 +71,42 @@ public class Server {
 
     }
 
-    private String translateWord(String word) {
-        String result = "[" + word + "]";
-
-        for(String[] translation : Server.translations) {
-            if(translation[0].equals(word.toLowerCase())) {
-                result = translation[1];
-            }
-        }
-
-        return result;
-    }
-
-    private String translateSentence(String sentence) {
-        String[] words = sentence.split(" ");
-        String result = "";
+    private String translateEnglishToDutch(String input) {
+        String[] words = input.split(" ");
+        ArrayList<String> result = new ArrayList<String>();
 
         for(String word : words) {
-            result += this.translateWord(word) + " ";
+            String translation = "[" + word + "]";
+
+            for(String[] dictionary : Server.translations) {
+                if(dictionary[0].equals(word.toLowerCase())) {
+                    translation = dictionary[1];
+                }
+            }
+
+            result.add(translation);
         }
 
-        return result.trim();
+        return StringUtils.join(result, " ");
+    }
+
+    private String translateDutchToEnglish(String input) {
+        String[] words = input.split(" ");
+        ArrayList<String> result = new ArrayList<String>();
+
+        for(String word : words) {
+            String translation = "[" + word + "]";
+
+            for(String[] dictionary : Server.translations) {
+                if(dictionary[1].equals(word.toLowerCase())) {
+                    translation = dictionary[0];
+                }
+            }
+
+            result.add(translation);
+        }
+
+        return StringUtils.join(result, " ");
     }
 
     private String protocol() {
@@ -100,26 +118,38 @@ public class Server {
 
         switch(this.state) {
             case WAITING:
-                if(input.toLowerCase().equals("sentence")) {
-                    output = "ready to translate a sentence";
-                    this.state = State.TRANSLATESENTENCE;
-                }
-                else if(input.toLowerCase().equals("word")) {
-                    output = "ready to translate a word";
-                    this.state = State.TRANSLATEWORD;
+                if(input.toLowerCase().equals("dutch")) {
+                        output = "ready to translate from dutch to english.";
+                        this.state = State.TRANSLATETODUTCH;
+                    }
+                else if(input.toLowerCase().equals("english")) {
+                    output = "ready to translate from english to dutch.";
+                    this.state = State.TRANSLATETOENGLISH;
                 }
                 else {
-                    output = "Do you want to translate a word or sentence";
+                    output = "Do you want to translate from dutch or english? (type SWITCH to switch languages)";
                 }
 
                 break;
-            case TRANSLATEWORD:
-                output = this.translateWord(input);
-                this.state = State.WAITING;
+            case TRANSLATETODUTCH:
+                if(input.equals("SWITCH")) {
+                    this.state = State.WAITING;
+                    output = "Do you want to translate from dutch or english? (type SWITCH to switch languages)";
+                }
+                else {
+                    output = this.translateDutchToEnglish(input);
+                }
+
                 break;
-            case TRANSLATESENTENCE:
-                output = this.translateSentence(input);
-                this.state = State.WAITING;
+            case TRANSLATETOENGLISH:
+                if(input.equals("SWITCH")) {
+                    this.state = State.WAITING;
+                    output = "Do you want to translate from dutch or english? (type SWITCH to switch languages)";
+                }
+                else {
+                    output = this.translateEnglishToDutch(input);
+                }
+
                 break;
             default:
                 output = "error";
