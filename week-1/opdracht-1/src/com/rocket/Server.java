@@ -10,7 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Server {
+public class Server extends Thread{
 
     private static String[][] translations = {
             {"hello", "hallo"},
@@ -35,7 +35,6 @@ public class Server {
     };
 
     private State state;
-    private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -44,11 +43,12 @@ public class Server {
         this.state = State.WAITING;
 
         System.out.println("Starting server");
+        boolean listening = true;
 
-        try {
-            this.serverSocket = new ServerSocket(port);
-            this.clientSocket = serverSocket.accept();
-
+        try(ServerSocket serverSocket = new ServerSocket(port)) {
+            while (listening) {
+                new MultiServerThread(clientSocket = serverSocket.accept()).start();
+            }
             System.out.println("Started server on port: " + port);
 
             this.out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -66,7 +66,7 @@ public class Server {
 
         } catch (IOException e) {
             System.out.println("Couldn't open server socket on " + port);
-            System.exit(0);
+            System.exit(-1);
         }
 
     }
