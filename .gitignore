@@ -63,7 +63,6 @@ node_modules
 sftp-config.json
 
 # intellij workspace
-**/.idea/workspace.xml 
-**/.idea/tasks.xml
+**/.idea 
 *.xml
 *.iml
