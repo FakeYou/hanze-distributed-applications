@@ -1,35 +1,29 @@
 package nl.hanze.web.homegrownrpc.addressbook;
 
-import java.util.List;
-
 public class AddressBookStub extends nl.hanze.web.homegrownrpc.generic.Stub implements nl.hanze.web.homegrownrpc.addressbook.AddressBook {
 
-    public void addStudent(Student student) throws Exception {
-        invokeSkel("addStudent", new Class[] {Student.class}, new Object[] {student});
+    public void addStudent(nl.hanze.web.homegrownrpc.addressbook.Student arg0) throws Exception {
+        Object obj = invokeSkel("addStudent", new java.lang.Class[] {nl.hanze.web.homegrownrpc.addressbook.Student.class}, new java.lang.Object[] {arg0});
     }
 
-    public boolean removeStudent(int stdNummer) throws Exception {
-        Object obj = invokeSkel("removeStudent", new Class[] {int.class}, new Object[] {stdNummer});
-
-        return ((Boolean) obj).booleanValue();
+    public boolean removeStudent(int arg0) throws Exception {
+        Object obj = invokeSkel("removeStudent", new java.lang.Class[] {int.class}, new java.lang.Object[] {arg0});
+        return (boolean) obj;
     }
 
-    public List<Student> getAllStudentsAsList() throws Exception {
-        Object obj = invokeSkel("getAllStudentsAsList", null, null);
-
-        return (List<Student>) obj;
-    }
-
-    public Student[] getAllStudentsAsArray() throws Exception {
-        Object obj = invokeSkel("getAllStudentsAsArraya", null, null);
-
-        return (Student[]) obj;
-    }
-
-    public int countStudents() throws Exception {
+    public int countStudents () throws Exception {
         Object obj = invokeSkel("countStudents", null, null);
+        return (int) obj;
+    }
 
-        return ((Integer) obj).intValue();
+    public nl.hanze.web.homegrownrpc.addressbook.Student[] getAllStudentsAsArray () throws Exception {
+        Object obj = invokeSkel("getAllStudentsAsArray", null, null);
+        return (nl.hanze.web.homegrownrpc.addressbook.Student[]) obj;
+    }
+
+    public java.util.List getAllStudentsAsList () throws Exception {
+        Object obj = invokeSkel("getAllStudentsAsList", null, null);
+        return (java.util.List) obj;
     }
 
 }
