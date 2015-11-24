@@ -5,9 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server extends Thread{
-
     private Socket clientSocket;
-
 
     public Server(int port) {
 
