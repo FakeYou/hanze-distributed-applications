@@ -5,6 +5,7 @@ import java.util.*;
 
 public class AddressBookClient {
     public static void main(String[] args) throws Exception {
+        System.out.println("AddressBookClient");
         NameClient nc=new NameClient("localhost", 7090);
         AddressBook ab = (AddressBook) nc.getReference("AddressBookServer");
         System.out.println("We obtained "+ab+" that implements AddressBook");
