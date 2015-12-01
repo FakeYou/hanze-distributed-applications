@@ -1,6 +1,7 @@
 package nl.hanze.webservice;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,12 +18,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name="student")
 
 public class Student {
-	private XStream xstream = new XStream();
-	
+	private static XStream xstream = new XStream(new DomDriver());
+
 	@XmlElement(required=true)
 	private String naam;
 	@XmlElement(required=true)
-	private int leetijd;
+	private int leeftijd;
 	@XmlElement(required=true)
 	private boolean geslacht;
 	
@@ -32,11 +33,11 @@ public class Student {
 	public void setNaam(String naam) {
 		this.naam = naam;
 	}
-	public int getLeetijd() {
-		return leetijd;
+	public int getLeeftijd() {
+		return leeftijd;
 	}
-	public void setLeetijd(int leetijd) {
-		this.leetijd = leetijd;
+	public void setLeeftijd(int leeftijd) {
+		this.leeftijd = leeftijd;
 	}
 	public boolean isGeslacht() {
 		return geslacht;
@@ -46,7 +47,6 @@ public class Student {
 	}
 	
 	protected String toXML() {
-		//week 2, opgave 1a
         return xstream.toXML(this);
 	}
 }
