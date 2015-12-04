@@ -1,5 +1,6 @@
 package javabank;
 
+import javabank.DBHandlers.DBHandlerAccount;
 import javabank.Models.Account;
 
 import javax.jws.WebMethod;
@@ -25,6 +26,8 @@ public class BankOperations {
         if(!accounts.containsKey(account.getBic())) {
             accounts.put(account.getBic(), account);
         }
+        DBHandlerAccount dbHandlerAccount = new DBHandlerAccount();
+        dbHandlerAccount.addAccount(account);
     }
 
     @WebMethod
@@ -39,8 +42,8 @@ public class BankOperations {
         Account toAccount = accounts.get(toBic);
 
         if(fromAccount != null && toAccount != null && fromAccount.getCredit() >= amount) {
-            fromAccount.setCredit(fromAccount.getCredit() - amount);
-            toAccount.setCredit(toAccount.getCredit() + amount);
+            fromAccount.setBalance(fromAccount.getBalance() - amount);
+            toAccount.setBalance(toAccount.getBalance() + amount);
             return true;
         }
 

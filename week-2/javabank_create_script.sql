@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `JavaBank`.`transactions` ;
 
 CREATE TABLE IF NOT EXISTS `JavaBank`.`transactions` (
   `id` BIGINT NOT NULL COMMENT '',
-  `sender_account_number` BIGINT NULL COMMENT '',
+  `sender_account_number` VARCHAR(45) NULL COMMENT '',
   `receiver_account_number` VARCHAR(45) NULL COMMENT '',
   `date` DATE NULL COMMENT '',
   `amount` FLOAT NULL COMMENT '',
