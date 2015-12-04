@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Lasse on 4-12-2015.
@@ -35,12 +38,25 @@ public class DBHandlerAccount {
         return rowId;
     }
 
-    public void getAccount(String accountNumber) {
-        ResultSet resultSet;
-
+    public Account getAccount(String accountNumber) {
+        HashMap resultMap = new HashMap();
         String queryAddAccount = String.format("SELECT * FROM accounts WHERE account_number='%s'", accountNumber);
-        resultSet = dbHandler.get(queryAddAccount);
+        resultMap = dbHandler.get(queryAddAccount);
+        resultMap.get(0);
 
         Account account = new Account();
+
+        try {
+            account.setBalance((Float) resultMap.get(Account.column_balance_amount));
+            account.setBic((String) resultMap.get(Account.column_account_number));
+            account.setName((String) resultMap.get(Account.column_name));
+            account.setAddress((String) resultMap.get(Account.column_address));
+            account.setCity((String) resultMap.get(Account.column_city));
+            account.setLimit((Float) resultMap.get(Account.column_limit_amount));
+
+            }catch (Exception e){
+            e.printStackTrace();
+        }
+        return account;
     }
 }

@@ -24,6 +24,7 @@ public class Runner {
     lasse.setLimit(5000);
 
 //    dbHandlerAccount.addAccount(lasse);
-    dbHandlerAccount.getAccount(lasse.getBic());
+    Account lol = dbHandlerAccount.getAccount(lasse.getBic());
+    lol.getName();
   }
 }

@@ -1,6 +1,9 @@
 package javabank.DBHandlers;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class DBHandler {
 
@@ -15,6 +18,7 @@ public class DBHandler {
     //  Database credentials
     static final String USER = "root";
     static final String PASS = "toor";
+
 
     /**
      * Register JDBC Driver
@@ -50,10 +54,13 @@ public class DBHandler {
         return row;
     }
 
-    public ResultSet get(String query) {
+    public HashMap get(String query) {
+        HashMap resultMap = new HashMap();
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
+
+            resultMap = resultSetToHashMap(resultSet);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,6 +73,33 @@ public class DBHandler {
                 e.printStackTrace();
             }
         }
-        return resultSet;
+        return resultMap;
+    }
+
+    public List resultSetToArrayList(ResultSet rs) throws SQLException{
+        ResultSetMetaData md = rs.getMetaData();
+        int columns = md.getColumnCount();
+        ArrayList list = new ArrayList(50);
+        while (rs.next()){
+            HashMap row = new HashMap(columns);
+            for(int i=1; i<=columns; ++i){
+                row.put(md.getColumnName(i),rs.getObject(i));
+            }
+            list.add(row);
+        }
+
+        return list;
+    }
+
+    public HashMap resultSetToHashMap(ResultSet rs) throws SQLException{
+        ResultSetMetaData md = rs.getMetaData();
+        int columns = md.getColumnCount();
+        HashMap row = new HashMap(columns);
+        while (rs.next()){
+            for(int i=1; i<=columns; ++i){
+                row.put(md.getColumnName(i),rs.getObject(i));
+            }
+        }
+        return row;
     }
 }

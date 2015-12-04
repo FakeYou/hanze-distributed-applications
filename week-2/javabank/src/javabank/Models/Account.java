@@ -15,6 +15,15 @@ public class Account {
     private float limit;
     private float balance;
 
+    // Database column names
+    public static final String column_balance_amount = "balance_amount";
+    public static final String column_account_number = "account_number";
+    public static final String column_name = "name";
+    public static final String column_address = "address";
+    public static final String column_city = "city";
+    public static final String column_limit_amount = "limit_amount";
+
+
 
     public Account() {
 
