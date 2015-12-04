@@ -67,3 +67,5 @@ sftp-config.json
 **/.idea 
 *.xml
 *.iml
+
+out/
