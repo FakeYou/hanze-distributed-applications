@@ -1,13 +1,19 @@
 package example;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name="account")
+@XmlRootElement(name="Account")
+@XmlType(propOrder={"name", "bic", "credit"})
 public class Account {
 
     private String name;
     private String bic;
-    private int credit;
+    private float credit;
+
+    public Account() {
+
+    }
 
     public Account(String name, String bic) {
         this.name = name;
@@ -29,5 +35,13 @@ public class Account {
 
     public void setBic(String bic) {
         this.bic = bic;
+    }
+
+    public float getCredit() {
+        return credit;
+    }
+
+    public void setCredit(float credit) {
+        this.credit = credit;
     }
 }
