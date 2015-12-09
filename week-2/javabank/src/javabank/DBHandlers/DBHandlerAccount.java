@@ -2,10 +2,7 @@ package javabank.DBHandlers;
 
 import javabank.Models.Account;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,31 +50,31 @@ public class DBHandlerAccount extends DBHandler {
             account.setCity((String) resultMap.get(Account.column_city));
             account.setLimit((Float) resultMap.get(Account.column_limit_amount));
 
-            }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
         return account;
     }
 
-    public int getAccountId(Account account){
+    public int getAccountId(Account account) {
         int accountId = -1;
         HashMap resultMap = new HashMap();
-        String queryGetAccountId= String.format("SELECT id FROM accounts WHERE account_number='%s'", account.getBic());
+        String queryGetAccountId = String.format("SELECT id FROM accounts WHERE account_number='%s'", account.getBic());
         resultMap = dbHandler.get(queryGetAccountId);
 
-       accountId = (int) resultMap.get("id");
+        accountId = (int) resultMap.get("id");
 
         return accountId;
     }
 
-    public int updateAccount(Account account){
+    public int updateAccount(Account account) {
         int rowId = -1;
 
-        rowId =getAccountId(account);
+        rowId = getAccountId(account);
 
         String queryAddAccount = String.format("UPDATE accounts SET balance_amount= %f, account_number= '%s', name='%s', " +
-                "address='%s', city='%s', limit_amount=%f WHERE id=%d",
+                        "address='%s', city='%s', limit_amount=%f WHERE id=%d",
                 account.getBalance(), account.getBic(), account.getName(), account.getAddress(),
                 account.getCity(), account.getLimit(), rowId);
         dbHandler.add(queryAddAccount);
@@ -88,4 +85,35 @@ public class DBHandlerAccount extends DBHandler {
 
         return rowId;
     }
+
+    public int updateTransaction(Account senderAccount, Account receiverAccount) {
+        int updateRow = -1;
+        int rowId = -1;
+        Connection connection;
+        Statement statement;
+
+        try {
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            statement = connection.createStatement();
+
+            rowId = getAccountId(account);
+
+            String updateQuery = "UPDATE accounts SET balance_amount= %f WHERE id=%d", rowId;
+
+            updateRow = statement.executeUpdate(query);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return updateRow;
+    }
+
 }

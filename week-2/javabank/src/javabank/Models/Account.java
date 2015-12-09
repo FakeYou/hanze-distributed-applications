@@ -15,6 +15,7 @@ public class Account {
     private float balance;
 
     // Database column names
+    public static final String tableName = "accounts";
     public static final String column_balance_amount = "balance_amount";
     public static final String column_account_number = "account_number";
     public static final String column_name = "name";

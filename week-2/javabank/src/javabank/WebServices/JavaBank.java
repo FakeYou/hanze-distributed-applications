@@ -1,5 +1,6 @@
 package javabank.WebServices;
 
+import javabank.DBHandlers.DBHandler;
 import javabank.DBHandlers.DBHandlerAccount;
 import javabank.DBHandlers.DBHandlerTransaction;
 import javabank.Models.Account;
@@ -9,6 +10,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import java.sql.Connection;
 import java.util.Calendar;
 import java.util.Locale;
 
