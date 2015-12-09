@@ -73,6 +73,27 @@ public class DBHandler {
         return resultMap;
     }
 
+    protected List<HashMap> getMany(String query) {
+        List resultList = new ArrayList<>();
+        try {
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            resultList = resultSetToArrayList(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resultList;
+    }
+
     protected HashMap resultSetToHashMap(ResultSet rs) throws SQLException {
         ResultSetMetaData md = rs.getMetaData();
         int columns = md.getColumnCount();
@@ -83,5 +104,20 @@ public class DBHandler {
             }
         }
         return row;
+    }
+
+    protected List<HashMap> resultSetToArrayList(ResultSet rs) throws SQLException{
+        ResultSetMetaData md = rs.getMetaData();
+        int columns = md.getColumnCount();
+        ArrayList list = new ArrayList(50);
+        while (rs.next()){
+            HashMap row = new HashMap(columns);
+            for(int i=1; i<=columns; ++i){
+                row.put(md.getColumnName(i),rs.getObject(i));
+            }
+            list.add(row);
+        }
+
+        return list;
     }
 }

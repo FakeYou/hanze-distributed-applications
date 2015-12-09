@@ -42,7 +42,6 @@ public class DBHandlerAccount extends DBHandler {
         HashMap resultMap = new HashMap();
         String queryAddAccount = String.format("SELECT * FROM accounts WHERE account_number='%s'", accountNumber);
         resultMap = dbHandler.get(queryAddAccount);
-        resultMap.get(0);
 
         Account account = new Account();
 
@@ -56,6 +55,7 @@ public class DBHandlerAccount extends DBHandler {
 
             }catch (Exception e){
             e.printStackTrace();
+            return null;
         }
         return account;
     }

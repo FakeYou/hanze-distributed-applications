@@ -15,6 +15,8 @@ public class Transaction {
 
     private String sender_bic;
     private String receiver_bic;
+    private Date date;
+    private float amount;
 
     public Transaction(){
 
@@ -52,8 +54,6 @@ public class Transaction {
         this.amount = amount;
     }
 
-    private Date date;
-    private float amount;
 
 
 
