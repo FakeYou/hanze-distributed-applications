@@ -11,7 +11,6 @@ public class Account {
     private String city;
     private String address;
     private String bic;
-    private float credit;
     private float limit;
     private float balance;
 
@@ -32,7 +31,6 @@ public class Account {
     public Account(String name, String bic) {
         this.name = name;
         this.bic = bic;
-        this.credit = 0;
     }
 
     public String getName() {
@@ -52,11 +50,7 @@ public class Account {
     }
 
     public float getCredit() {
-        return credit;
-    }
-
-    public void setCredit(float credit) {
-        this.credit = credit;
+        return balance + limit;
     }
 
     public String getAddress() {

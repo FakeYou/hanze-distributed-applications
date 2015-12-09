@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DBHandler {
 
-    private static Connection connection;
+    private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
 
@@ -26,17 +26,15 @@ public class DBHandler {
     public DBHandler() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public int add(String query) {
+    protected int add(String query) {
         int row = -1;
         try {
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
             statement = connection.createStatement();
             row = statement.executeUpdate(query);
 
@@ -46,7 +44,6 @@ public class DBHandler {
             try {
                 statement.close();
                 connection.close();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -54,9 +51,10 @@ public class DBHandler {
         return row;
     }
 
-    public HashMap get(String query) {
+    protected HashMap get(String query) {
         HashMap resultMap = new HashMap();
         try {
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
 
@@ -68,7 +66,6 @@ public class DBHandler {
             try {
                 statement.close();
                 connection.close();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -76,28 +73,13 @@ public class DBHandler {
         return resultMap;
     }
 
-    public List resultSetToArrayList(ResultSet rs) throws SQLException{
-        ResultSetMetaData md = rs.getMetaData();
-        int columns = md.getColumnCount();
-        ArrayList list = new ArrayList(50);
-        while (rs.next()){
-            HashMap row = new HashMap(columns);
-            for(int i=1; i<=columns; ++i){
-                row.put(md.getColumnName(i),rs.getObject(i));
-            }
-            list.add(row);
-        }
-
-        return list;
-    }
-
-    public HashMap resultSetToHashMap(ResultSet rs) throws SQLException{
+    protected HashMap resultSetToHashMap(ResultSet rs) throws SQLException {
         ResultSetMetaData md = rs.getMetaData();
         int columns = md.getColumnCount();
         HashMap row = new HashMap(columns);
-        while (rs.next()){
-            for(int i=1; i<=columns; ++i){
-                row.put(md.getColumnName(i),rs.getObject(i));
+        while (rs.next()) {
+            for (int i = 1; i <= columns; ++i) {
+                row.put(md.getColumnName(i), rs.getObject(i));
             }
         }
         return row;

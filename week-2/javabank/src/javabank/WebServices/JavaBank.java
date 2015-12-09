@@ -34,6 +34,6 @@ public class JavaBank {
     @WebResult(name="success")
     public boolean transfer(@WebParam(name="amount") float amount, @WebParam(name="senderBic") String senderBic,
                             @WebParam(name="receiverBic") String receiverBic) {
-        
+
     }
 }

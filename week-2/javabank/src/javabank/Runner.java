@@ -1,9 +1,14 @@
 package javabank;
 import javabank.DBHandlers.DBHandler;
 import javabank.DBHandlers.DBHandlerAccount;
+import javabank.DBHandlers.DBHandlerTransaction;
 import javabank.Models.Account;
+import javabank.Models.Transaction;
 
 import javax.jws.WebService;
+import java.sql.Date;
+import java.sql.SQLData;
+import java.util.Calendar;
 import java.util.Locale;
 
 @WebService()
@@ -13,18 +18,14 @@ public class Runner {
     // For Float comma to dot conversion
     Locale.setDefault(Locale.US);
 
-    DBHandlerAccount dbHandlerAccount = new DBHandlerAccount();
+    Transaction transaction = new Transaction();
+    transaction.setDate(new Date(Calendar.getInstance().getTime().getTime()));
+    transaction.setReceiver_bic("IBAN005");
+    transaction.setSender_bic("IBAN006");
+    transaction.setAmount(50);
 
-    Account lasse = new Account();
-    lasse.setBalance(50);
-    lasse.setBic("IBAN500");
-    lasse.setName("Lasse");
-    lasse.setAddress("Nee");
-    lasse.setCity("Nooit");
-    lasse.setLimit(5000);
+    DBHandlerTransaction dbHandlerTransaction = new DBHandlerTransaction();
+    dbHandlerTransaction.addTransaction(transaction);
 
-//    dbHandlerAccount.addAccount(lasse);
-    Account lol = dbHandlerAccount.getAccount(lasse.getBic());
-    lol.getName();
   }
 }
