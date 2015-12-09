@@ -77,6 +77,7 @@ public class DBHandlerAccount extends DBHandler {
                         "address='%s', city='%s', limit_amount=%f WHERE id=%d",
                 account.getBalance(), account.getBic(), account.getName(), account.getAddress(),
                 account.getCity(), account.getLimit(), rowId);
+
         dbHandler.add(queryAddAccount);
 
         if (rowId != -1) {
