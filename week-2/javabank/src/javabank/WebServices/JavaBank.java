@@ -9,6 +9,9 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -36,19 +39,22 @@ public class JavaBank {
     }
 
     @WebMethod
+    public void alterAccount(@WebParam(name="Account") Account account) {
+        dbHandlerAccount.updateAccount(account);
+    }
+
+    @WebMethod
     @WebResult(name="success")
     public boolean transfer(@WebParam(name="amount") float amount, @WebParam(name="senderBic") String senderBic,
-                            @WebParam(name="receiverBic") String receiverBic) { boolean transferSuccessful = false;
-
-        DBHandlerAccount dbHandlerAccount = new DBHandlerAccount();
+                            @WebParam(name="receiverBic") String receiverBic) {
 
         Account senderAccount = dbHandlerAccount.getAccount(senderBic);
         Account receiverAccount = dbHandlerAccount.getAccount(receiverBic);
 
         if (senderAccount == null || receiverAccount == null || amount > senderAccount.getCredit()) {
-            return transferSuccessful;
-        } else {
-
+            return false;
+        }
+        else {
             senderAccount.setBalance(senderAccount.getBalance() - amount);
             receiverAccount.setBalance(receiverAccount.getBalance() + amount);
 
@@ -61,18 +67,18 @@ public class JavaBank {
             transaction.setReceiverBic(receiverBic);
             transaction.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
-            DBHandlerTransaction dbHandlerTransaction = new DBHandlerTransaction();
             dbHandlerTransaction.addTransaction(transaction);
 
-            transferSuccessful = true;
+            return true;
         }
-
-        return transferSuccessful;
     }
-//
-//    @WebMethod
-//    @WebResult(name="Transaction")
-//    public Transaction[] getTransactions(String bic, String date) {
-//        return null;
-//    }
+
+    @WebMethod
+    @WebResult(name="Transaction")
+    @XmlElementWrapper(name="Transactions")
+    public Transaction[] getTransactions(String bic, String date) {
+        ArrayList<Transaction> transactions = dbHandlerTransaction.getTransactions(bic, date);
+
+        return transactions.toArray(new Transaction[transactions.size()]);
+    }
 }

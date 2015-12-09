@@ -74,12 +74,13 @@ public class DBHandlerAccount extends DBHandler {
     public int updateAccount(Account account){
         int rowId = -1;
 
-        rowId =getAccountId(account);
+        rowId = getAccountId(account);
 
         String queryAddAccount = String.format("UPDATE accounts SET balance_amount= %f, account_number= '%s', name='%s', " +
                 "address='%s', city='%s', limit_amount=%f WHERE id=%d",
                 account.getBalance(), account.getBic(), account.getName(), account.getAddress(),
                 account.getCity(), account.getLimit(), rowId);
+
         dbHandler.add(queryAddAccount);
 
         if (rowId != -1) {

@@ -2,7 +2,7 @@ package javabank.Models;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 
 @XmlRootElement(name = "Transaction")
