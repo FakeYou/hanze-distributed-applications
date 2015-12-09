@@ -87,34 +87,67 @@ public class DBHandlerAccount extends DBHandler {
         return rowId;
     }
 
-    public int updateTransaction(Account senderAccount, Account receiverAccount) {
-        int updateRow = -1;
-        int rowId = -1;
-        Connection connection;
-        Statement statement;
+    public boolean updateTransaction(Account senderAccount, Account receiverAccount) {
+        boolean succes = false;
+        Connection connection = null;
+
+        int rowIdReceiver = getAccountId(receiverAccount);
+        int rowIdSender = getAccountId(senderAccount);
+
+        PreparedStatement updateSenderStatement  = null;
+        PreparedStatement updateReceiverStatement  = null;
+
+        String updateString =
+                "update " + Account.tableName +
+                        " set "+ Account.column_balance_amount + "= ? where id= ?";
 
         try {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            statement = connection.createStatement();
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            connection.setAutoCommit(false);
 
-            rowId = getAccountId(account);
+            updateSenderStatement = connection.prepareStatement(updateString);
+            updateReceiverStatement= connection.prepareStatement(updateString);
 
-            String updateQuery = "UPDATE accounts SET balance_amount= %f WHERE id=%d", rowId;
+            // set values for updateSenderStatement statement
+            updateSenderStatement.setFloat(1, senderAccount.getBalance());
+            updateSenderStatement.setInt(2, rowIdSender);
+            updateSenderStatement.executeUpdate();
 
-            updateRow = statement.executeUpdate(query);
+            // Testen Atomair
+//            if(1==1){
+//               throw new SQLException();
+//            }
+            
+            // set values for updateReceiverAccount statement
+            updateReceiverStatement.setFloat(1, receiverAccount.getBalance());
+            updateReceiverStatement.setInt(2, rowIdReceiver);
+            updateReceiverStatement.executeUpdate();
 
+            connection.commit();
+            throw new SQLException();
+//            succes = true;
 
         } catch (SQLException e) {
             e.printStackTrace();
+
+            if(connection != null)
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         } finally {
             try {
-                statement.close();
+                updateReceiverStatement.close();
+                updateSenderStatement.close();
+                connection.setAutoCommit(true);
                 connection.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return updateRow;
+        return succes;
     }
 
 }

@@ -60,18 +60,19 @@ public class JavaBank {
             senderAccount.setBalance(senderAccount.getBalance() - amount);
             receiverAccount.setBalance(receiverAccount.getBalance() + amount);
 
-            dbHandlerAccount.updateAccount(senderAccount);
-            dbHandlerAccount.updateAccount(receiverAccount);
+            if(dbHandlerAccount.updateTransaction(senderAccount, receiverAccount)) {
 
-            Transaction transaction = new Transaction();
-            transaction.setAmount(amount);
-            transaction.setSenderBic(senderBic);
-            transaction.setReceiverBic(receiverBic);
-            transaction.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+                Transaction transaction = new Transaction();
+                transaction.setAmount(amount);
+                transaction.setSenderBic(senderBic);
+                transaction.setReceiverBic(receiverBic);
+                transaction.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
-            dbHandlerTransaction.addTransaction(transaction);
+                dbHandlerTransaction.addTransaction(transaction);
+                return true;
 
-            return true;
+            }
+            return false;
         }
     }
 
