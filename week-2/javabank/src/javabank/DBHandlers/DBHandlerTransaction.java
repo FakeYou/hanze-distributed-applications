@@ -24,7 +24,7 @@ public class DBHandlerTransaction {
 
         String queryAddTransaction = String.format("INSERT INTO transactions (sender_account_number, receiver_account_number, date, amount) " +
                         "VALUES ('%s', '%s', '%s', %f)",
-                transaction.getSender_bic(), transaction.getReceiver_bic(), transaction.getDate(), transaction.getAmount());
+                transaction.getSenderBic(), transaction.getReceiverBic(), transaction.getDate(), transaction.getAmount());
         rowId = dbHandler.add(queryAddTransaction);
 
         return rowId;
@@ -50,8 +50,8 @@ public class DBHandlerTransaction {
             try {
                 Transaction transaction = new Transaction();
                 transaction.setDate((Date) resultMap.get(Transaction.column_date));
-                transaction.setReceiver_bic((String) resultMap.get(Transaction.column_receiver_account_number));
-                transaction.setSender_bic((String) resultMap.get(Transaction.column_sender_account_number));
+                transaction.setReceiverBic((String) resultMap.get(Transaction.column_receiver_account_number));
+                transaction.setSenderBic((String) resultMap.get(Transaction.column_sender_account_number));
                 transaction.setAmount((Float) resultMap.get(Transaction.column_amount));
 
                 transactions.add(transaction);

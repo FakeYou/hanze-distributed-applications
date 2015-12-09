@@ -54,38 +54,38 @@ public class BankOperations {
 //        return false;
 //    }
 
-    public boolean transfer(float amount, String sender_bic, String receiver_bic) {
-        boolean transferSuccessful = false;
-
-        DBHandlerAccount dbHandlerAccount = new DBHandlerAccount();
-
-        Account senderAccount = dbHandlerAccount.getAccount(sender_bic);
-        Account receiverAccount = dbHandlerAccount.getAccount(receiver_bic);
-
-        if (senderAccount == null || receiverAccount == null || amount > senderAccount.getCredit()) {
-            return transferSuccessful;
-        } else {
-
-            senderAccount.setBalance(senderAccount.getBalance() - amount);
-            receiverAccount.setBalance(receiverAccount.getBalance() + amount);
-
-            dbHandlerAccount.updateAccount(senderAccount);
-            dbHandlerAccount.updateAccount(receiverAccount);
-
-            Transaction transaction = new Transaction();
-            transaction.setAmount(amount);
-            transaction.setSender_bic(sender_bic);
-            transaction.setReceiver_bic(receiver_bic);
-            transaction.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-
-            DBHandlerTransaction dbHandlerTransaction = new DBHandlerTransaction();
-            dbHandlerTransaction.addTransaction(transaction);
-
-            transferSuccessful = true;
-        }
-
-        return transferSuccessful;
-    }
+//    public boolean transfer(float amount, String sender_bic, String receiver_bic) {
+//        boolean transferSuccessful = false;
+//
+//        DBHandlerAccount dbHandlerAccount = new DBHandlerAccount();
+//
+//        Account senderAccount = dbHandlerAccount.getAccount(sender_bic);
+//        Account receiverAccount = dbHandlerAccount.getAccount(receiver_bic);
+//
+//        if (senderAccount == null || receiverAccount == null || amount > senderAccount.getCredit()) {
+//            return transferSuccessful;
+//        } else {
+//
+//            senderAccount.setBalance(senderAccount.getBalance() - amount);
+//            receiverAccount.setBalance(receiverAccount.getBalance() + amount);
+//
+//            dbHandlerAccount.updateAccount(senderAccount);
+//            dbHandlerAccount.updateAccount(receiverAccount);
+//
+//            Transaction transaction = new Transaction();
+//            transaction.setAmount(amount);
+//            transaction.setSenderBic(sender_bic);
+//            transaction.setReceiver_bic(receiver_bic);
+//            transaction.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+//
+//            DBHandlerTransaction dbHandlerTransaction = new DBHandlerTransaction();
+//            dbHandlerTransaction.addTransaction(transaction);
+//
+//            transferSuccessful = true;
+//        }
+//
+//        return transferSuccessful;
+//    }
 
     @WebMethod
     @WebResult(name = "Account")

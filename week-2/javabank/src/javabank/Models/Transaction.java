@@ -1,10 +1,12 @@
 package javabank.Models;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.sql.Date;
+import java.util.Calendar;
 
-/**
- * Created by Lasse on 4-12-2015.
- */
+@XmlRootElement(name = "Transaction")
+@XmlType(propOrder = {"date", "senderBic", "receiverBic", "amount"})
 public class Transaction {
 
     public static final String column_id = "id";
@@ -13,8 +15,8 @@ public class Transaction {
     public static final String column_date = "date";
     public static final String column_amount = "amount";
 
-    private String sender_bic;
-    private String receiver_bic;
+    private String senderBic;
+    private String receiverBic;
     private Date date;
     private float amount;
 
@@ -22,20 +24,27 @@ public class Transaction {
 
     }
 
-    public String getSender_bic() {
-        return sender_bic;
+    public Transaction(String sender_bic, String receiver_bic, float amount) {
+        this.senderBic = sender_bic;
+        this.receiverBic = receiver_bic;
+        this.amount = amount;
+        this.date = new Date(Calendar.getInstance().getTime().getTime());
     }
 
-    public void setSender_bic(String sender_bic) {
-        this.sender_bic = sender_bic;
+    public String getSenderBic() {
+        return senderBic;
     }
 
-    public String getReceiver_bic() {
-        return receiver_bic;
+    public void setSenderBic(String senderBic) {
+        this.senderBic = senderBic;
     }
 
-    public void setReceiver_bic(String receiver_bic) {
-        this.receiver_bic = receiver_bic;
+    public String getReceiverBic() {
+        return receiverBic;
+    }
+
+    public void setReceiverBic(String receiverBic) {
+        this.receiverBic = receiverBic;
     }
 
     public Date getDate() {
@@ -53,9 +62,4 @@ public class Transaction {
     public void setAmount(float amount) {
         this.amount = amount;
     }
-
-
-
-
-
 }
