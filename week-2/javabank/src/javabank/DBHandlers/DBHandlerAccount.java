@@ -118,15 +118,13 @@ public class DBHandlerAccount extends DBHandler {
 //            if(1==1){
 //               throw new SQLException();
 //            }
-            
+
             // set values for updateReceiverAccount statement
             updateReceiverStatement.setFloat(1, receiverAccount.getBalance());
             updateReceiverStatement.setInt(2, rowIdReceiver);
             updateReceiverStatement.executeUpdate();
 
             connection.commit();
-            throw new SQLException();
-//            succes = true;
 
         } catch (SQLException e) {
             e.printStackTrace();
