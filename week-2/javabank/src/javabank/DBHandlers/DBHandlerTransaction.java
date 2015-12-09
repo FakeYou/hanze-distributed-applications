@@ -18,12 +18,8 @@ public class DBHandlerTransaction {
 
         String queryAddTransaction = String.format("INSERT INTO transactions (sender_account_number, receiver_account_number, date, amount) " +
                         "VALUES ('%s', '%s', '%s', %f)",
-                transaction.getSender_bic(), transaction.getReceiver_bic(), transaction.getDate(), transaction.getAmount());
-        dbHandler.add(queryAddTransaction);
-
-        if (rowId != -1) {
-            return rowId;
-        }
+                transaction.getSenderBic(), transaction.getReceiverBic(), transaction.getDate(), transaction.getAmount());
+        rowId = dbHandler.add(queryAddTransaction);
 
         return rowId;
     }

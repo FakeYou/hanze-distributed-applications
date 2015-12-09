@@ -1,17 +1,12 @@
 package javabank;
-import javabank.DBHandlers.DBHandler;
-import javabank.DBHandlers.DBHandlerAccount;
 import javabank.DBHandlers.DBHandlerTransaction;
-import javabank.Models.Account;
 import javabank.Models.Transaction;
 
 import javax.jws.WebService;
 import java.sql.Date;
-import java.sql.SQLData;
 import java.util.Calendar;
 import java.util.Locale;
 
-@WebService()
 public class Runner {
 
   public static void main(String[] argv) {
@@ -20,12 +15,15 @@ public class Runner {
 
     Transaction transaction = new Transaction();
     transaction.setDate(new Date(Calendar.getInstance().getTime().getTime()));
-    transaction.setReceiver_bic("IBAN005");
-    transaction.setSender_bic("IBAN006");
+    transaction.setReceiverBic("IBAN005");
+    transaction.setSenderBic("IBAN006");
     transaction.setAmount(50);
 
     DBHandlerTransaction dbHandlerTransaction = new DBHandlerTransaction();
     dbHandlerTransaction.addTransaction(transaction);
 
+    int id = dbHandlerTransaction.addTransaction(new Transaction("IBAN005", "IBAN006", 50));
+
+    System.out.println(id);
   }
 }
