@@ -46,5 +46,4 @@ public class Thesaurus {
 
         return info;
     }
-
 }
