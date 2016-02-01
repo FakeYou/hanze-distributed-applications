@@ -1,5 +1,6 @@
 package javabank.WebServices;
 
+import javabank.DBHandlers.DBHandler;
 import javabank.DBHandlers.DBHandlerAccount;
 import javabank.DBHandlers.DBHandlerTransaction;
 import javabank.Models.Account;
@@ -9,6 +10,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import java.sql.Connection;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,18 +60,19 @@ public class JavaBank {
             senderAccount.setBalance(senderAccount.getBalance() - amount);
             receiverAccount.setBalance(receiverAccount.getBalance() + amount);
 
-            dbHandlerAccount.updateAccount(senderAccount);
-            dbHandlerAccount.updateAccount(receiverAccount);
+            if(dbHandlerAccount.updateTransaction(senderAccount, receiverAccount)) {
 
-            Transaction transaction = new Transaction();
-            transaction.setAmount(amount);
-            transaction.setSenderBic(senderBic);
-            transaction.setReceiverBic(receiverBic);
-            transaction.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+                Transaction transaction = new Transaction();
+                transaction.setAmount(amount);
+                transaction.setSenderBic(senderBic);
+                transaction.setReceiverBic(receiverBic);
+                transaction.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
-            dbHandlerTransaction.addTransaction(transaction);
+                dbHandlerTransaction.addTransaction(transaction);
+                return true;
 
-            return true;
+            }
+            return false;
         }
     }
 

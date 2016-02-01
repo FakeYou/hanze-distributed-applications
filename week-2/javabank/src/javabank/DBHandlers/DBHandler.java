@@ -51,6 +51,8 @@ public class DBHandler {
         return row;
     }
 
+
+
     protected HashMap get(String query) {
         HashMap resultMap = new HashMap();
         try {

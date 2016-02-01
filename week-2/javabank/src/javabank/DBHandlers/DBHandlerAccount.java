@@ -2,10 +2,7 @@ package javabank.DBHandlers;
 
 import javabank.Models.Account;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,31 +50,31 @@ public class DBHandlerAccount extends DBHandler {
             account.setCity((String) resultMap.get(Account.column_city));
             account.setLimit((Float) resultMap.get(Account.column_limit_amount));
 
-            }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
         return account;
     }
 
-    public int getAccountId(Account account){
+    public int getAccountId(Account account) {
         int accountId = -1;
         HashMap resultMap = new HashMap();
-        String queryGetAccountId= String.format("SELECT id FROM accounts WHERE account_number='%s'", account.getBic());
+        String queryGetAccountId = String.format("SELECT id FROM accounts WHERE account_number='%s'", account.getBic());
         resultMap = dbHandler.get(queryGetAccountId);
 
-       accountId = (int) resultMap.get("id");
+        accountId = (int) resultMap.get("id");
 
         return accountId;
     }
 
-    public int updateAccount(Account account){
+    public int updateAccount(Account account) {
         int rowId = -1;
 
         rowId = getAccountId(account);
 
         String queryAddAccount = String.format("UPDATE accounts SET balance_amount= %f, account_number= '%s', name='%s', " +
-                "address='%s', city='%s', limit_amount=%f WHERE id=%d",
+                        "address='%s', city='%s', limit_amount=%f WHERE id=%d",
                 account.getBalance(), account.getBic(), account.getName(), account.getAddress(),
                 account.getCity(), account.getLimit(), rowId);
 
@@ -89,4 +86,66 @@ public class DBHandlerAccount extends DBHandler {
 
         return rowId;
     }
+
+    public boolean updateTransaction(Account senderAccount, Account receiverAccount) {
+        boolean succes = false;
+        Connection connection = null;
+
+        int rowIdReceiver = getAccountId(receiverAccount);
+        int rowIdSender = getAccountId(senderAccount);
+
+        PreparedStatement updateSenderStatement  = null;
+        PreparedStatement updateReceiverStatement  = null;
+
+        String updateString =
+                "update " + Account.tableName +
+                        " set "+ Account.column_balance_amount + "= ? where id= ?";
+
+        try {
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            connection.setAutoCommit(false);
+
+            updateSenderStatement = connection.prepareStatement(updateString);
+            updateReceiverStatement= connection.prepareStatement(updateString);
+
+            // set values for updateSenderStatement statement
+            updateSenderStatement.setFloat(1, senderAccount.getBalance());
+            updateSenderStatement.setInt(2, rowIdSender);
+            updateSenderStatement.executeUpdate();
+
+            // Testen Atomair
+//            if(1==1){
+//               throw new SQLException();
+//            }
+
+            // set values for updateReceiverAccount statement
+            updateReceiverStatement.setFloat(1, receiverAccount.getBalance());
+            updateReceiverStatement.setInt(2, rowIdReceiver);
+            updateReceiverStatement.executeUpdate();
+
+            connection.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            if(connection != null)
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        } finally {
+            try {
+                updateReceiverStatement.close();
+                updateSenderStatement.close();
+                connection.setAutoCommit(true);
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return succes;
+    }
+
 }
