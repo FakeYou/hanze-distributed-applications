@@ -2,6 +2,8 @@
 
 ## Opgave 3
 
+Lasse
+
 - [x] opdracht a (rmiregistry in `out/production/RMIHelloStub`)
 - [ ] opdracht b (document)
 - [ ] opdracht c (document)
@@ -19,13 +21,17 @@
 - [x] opdracht f
 - [x] opdracht g (run `StubGenerator`)
 
-## Opgave 4
+## Opgave 5
+
+Lasse
 
 - [ ] verslag verschil WCF en RMI
 
 # Week 2
 
 ## Opgave 1
+
+Andre
 
 - [x] opdracht a (project `opdracht-1`, `Student`)
 - [x] opdracht b (`OutsideClass`)
@@ -36,12 +42,16 @@
 
 ## Opgave 2
 
+Lasse
+
 - [x] opdracht a (`javabank_create_script.sql`)
 - [x] opdracht b (project `javabank`, `WebServices/JavaBank`)
 - [ ] opdracht c
 - [ ] opdracht d
 
 ## Opgave 3
+
+Lasse
 
 - [ ] opdracht a
 - [ ] opdracht b
@@ -54,11 +64,15 @@
 
 ## Opgave 5
 
+Andre
+
 - [ ] opdracht a (how to run?)
 
 # Week 3
 
 ## Opgave 1
+
+Andre
 
 - [ ] opdracht a (document)
 - [ ] opdracht b
@@ -74,6 +88,8 @@
 
 ## Opgave 3
 
+Lasse
+
 - [ ] opdracht a (document)
 - [ ] opdracht b
 - [ ] opdracht c
@@ -86,10 +102,14 @@
 
 ## Opgave 4
 
+Andre
+
 - [ ] opdracht a
 - [ ] opdracht b
 
 # Opgave 5
+
+Andre
 
 - [ ] opdracht a
 - [ ] opdracht b
