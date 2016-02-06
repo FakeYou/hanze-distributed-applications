@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://webservice.hanze.nl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="MainService" targetNamespace="http://webservice.hanze.nl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://fakeyou-desktop:8080/opdracht_1_war_exploded/MainService?xsd=1" namespace="http://webservice.hanze.nl/" />
+    </xsd:schema>
+  </types>
+  <message name="getStudent">
+    <part name="parameters" element="tns:getStudent" />
+  </message>
+  <message name="getStudentResponse">
+    <part name="parameters" element="tns:getStudentResponse" />
+  </message>
+  <portType name="Main">
+    <operation name="getStudent">
+      <input wsam:Action="http://webservice.hanze.nl/Main/getStudentRequest" message="tns:getStudent" />
+      <output wsam:Action="http://webservice.hanze.nl/Main/getStudentResponse" message="tns:getStudentResponse" />
+    </operation>
+  </portType>
+  <binding name="MainPortBinding" type="tns:Main">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getStudent">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="MainService">
+    <port name="MainPort" binding="tns:MainPortBinding">
+      <soap:address location="http://fakeyou-desktop:8080/opdracht_1_war_exploded/MainService" />
+    </port>
+  </service>
+</definitions>

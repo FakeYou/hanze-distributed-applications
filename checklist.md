@@ -36,8 +36,9 @@ Andre
 - [x] opdracht a (project `opdracht-1`, `Student`)
 - [x] opdracht b (`OutsideClass`)
 - [x] opdracht c (`Main`)
-- [ ] opdracht d (deploy in GlassFish)
-- [ ] opdracht e (C#, PHP client)
+- [x] opdracht d (deploy in GlassFish)
+- [x] opdracht e (`php -c php-with-soap.ini ./client.php`)
+- [x] opdracht e (`./c-sharp/c-sharp/bin/Debug/c-sharp.exe <name>`)
 - [ ] opdracht f
 
 ## Opgave 2

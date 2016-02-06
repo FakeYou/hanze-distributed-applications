@@ -1,0 +1,6 @@
+C:\Users\xbox\Projects\hanze-distributed-applications\week-2\opdracht-1\c-sharp\c-sharp\bin\Debug\c-sharp.exe.config
+C:\Users\xbox\Projects\hanze-distributed-applications\week-2\opdracht-1\c-sharp\c-sharp\bin\Debug\c-sharp.exe
+C:\Users\xbox\Projects\hanze-distributed-applications\week-2\opdracht-1\c-sharp\c-sharp\bin\Debug\c-sharp.pdb
+C:\Users\xbox\Projects\hanze-distributed-applications\week-2\opdracht-1\c-sharp\c-sharp\obj\Debug\c-sharp.csprojResolveAssemblyReference.cache
+C:\Users\xbox\Projects\hanze-distributed-applications\week-2\opdracht-1\c-sharp\c-sharp\obj\Debug\c-sharp.exe
+C:\Users\xbox\Projects\hanze-distributed-applications\week-2\opdracht-1\c-sharp\c-sharp\obj\Debug\c-sharp.pdb

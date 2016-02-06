@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://webservice.hanze.nl/" targetNamespace="http://webservice.hanze.nl/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getStudent" type="tns:getStudent" />
+  <xs:element name="getStudentResponse" type="tns:getStudentResponse" />
+  <xs:element name="student" type="tns:student" />
+  <xs:complexType name="getStudent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="naam" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getStudentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Student" type="tns:student" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="student">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="naam" type="xs:string" />
+      <xs:element name="leeftijd" type="xs:int" />
+      <xs:element name="geslacht" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
