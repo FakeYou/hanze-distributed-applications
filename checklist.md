@@ -67,7 +67,7 @@ Lasse
 
 Andre
 
-- [ ] opdracht a (how to run?)
+- [x] opdracht a (deploy in glassfish)
 
 # Week 3
 
