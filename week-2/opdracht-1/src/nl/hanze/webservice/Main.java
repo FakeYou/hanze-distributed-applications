@@ -1,6 +1,8 @@
 package nl.hanze.webservice;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 
 @WebService
@@ -12,13 +14,14 @@ public class Main {
     }
 
     @WebMethod
-    public String getStudent(String naam) {
+    @WebResult(name="Student")
+    public Student getStudent(@WebParam(name="naam") String naam) {
         Student student = new Student();
 
         student.setNaam(naam);
         student.setLeeftijd(20);
         student.setGeslacht(true);
 
-        return student.toXML();
+        return student;
     }
 }

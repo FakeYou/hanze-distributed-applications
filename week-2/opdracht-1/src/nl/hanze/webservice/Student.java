@@ -1,31 +1,18 @@
 package nl.hanze.webservice;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="", propOrder={
-		"naam",
-		"leeftijd",
-		"geslacht"
-})
-@XmlRootElement(name="student")
-
+@XmlRootElement(name = "student")
+@XmlType(propOrder = {"naam", "leeftijd", "geslacht"})
 public class Student {
-	private static XStream xstream = new XStream(new DomDriver());
-
-	@XmlElement(required=true)
 	private String naam;
-	@XmlElement(required=true)
 	private int leeftijd;
-	@XmlElement(required=true)
 	private boolean geslacht;
+
+	public Student() {}
 	
 	public String getNaam() {
 		return naam;
@@ -44,9 +31,5 @@ public class Student {
 	}
 	public void setGeslacht(boolean geslacht) {
 		this.geslacht = geslacht;
-	}
-	
-	protected String toXML() {
-        return xstream.toXML(this);
 	}
 }
