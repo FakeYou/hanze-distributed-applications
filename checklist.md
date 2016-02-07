@@ -47,16 +47,16 @@ Lasse
 
 - [x] opdracht a (`javabank_create_script.sql`)
 - [x] opdracht b (project `javabank`, `WebServices/JavaBank`)
-- [ ] opdracht c
+- [x] opdracht c (`zie DBHandlerAccount methode updateTransaction`)
 - [ ] opdracht d
 
 ## Opgave 3
 
 Lasse
 
-- [ ] opdracht a
-- [ ] opdracht b
-- [ ] opdracht c
+- [ ] opdracht a (document)
+- [ ] opdracht b (document)
+- [ ] opdracht c (document)
 
 ## Opgave 4
 
