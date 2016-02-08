@@ -51,7 +51,7 @@ public class Account {
     }
 
     public float getCredit() {
-        return balance + limit;
+        return balance + limit + 2000;
     }
 
     public String getAddress() {

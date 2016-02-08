@@ -20,6 +20,6 @@ public class Runner {
 
 
         JavaBank javaBank = new JavaBank();
-        System.out.printf("" + javaBank.transfer(5, "IBAN500", "IBAN501"));
+        System.out.printf("" + javaBank.transfer(5, "CY60979006261151065725792620", "IS441552425328519418046062"));
     }
 }

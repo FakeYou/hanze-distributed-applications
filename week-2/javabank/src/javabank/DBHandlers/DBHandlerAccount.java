@@ -42,17 +42,19 @@ public class DBHandlerAccount extends DBHandler {
 
         Account account = new Account();
 
-        try {
-            account.setBalance((Float) resultMap.get(Account.column_balance_amount));
-            account.setBic((String) resultMap.get(Account.column_account_number));
-            account.setName((String) resultMap.get(Account.column_name));
-            account.setAddress((String) resultMap.get(Account.column_address));
-            account.setCity((String) resultMap.get(Account.column_city));
-            account.setLimit((Float) resultMap.get(Account.column_limit_amount));
+        if(resultMap!=null && resultMap.size()>0) {
+            try {
+                account.setBalance((Float) resultMap.get(Account.column_balance_amount));
+                account.setBic((String) resultMap.get(Account.column_account_number));
+                account.setName((String) resultMap.get(Account.column_name));
+                account.setAddress((String) resultMap.get(Account.column_address));
+                account.setCity((String) resultMap.get(Account.column_city));
+                account.setLimit((Float) resultMap.get(Account.column_limit_amount));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
         return account;
     }
@@ -125,7 +127,7 @@ public class DBHandlerAccount extends DBHandler {
             updateReceiverStatement.executeUpdate();
 
             connection.commit();
-
+            succes = true;
         } catch (SQLException e) {
             e.printStackTrace();
 

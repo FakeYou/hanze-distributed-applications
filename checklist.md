@@ -5,9 +5,9 @@
 Lasse
 
 - [x] opdracht a (rmiregistry in `out/production/RMIHelloStub`)
-- [ ] opdracht b (document)
-- [ ] opdracht c (document)
-- [ ] opdracht d (document)
+- [x] opdracht b (document)
+- [x] opdracht c (document)
+- [x] opdracht d (document)
 - [x] opdracht e (project `RMIHelloStub`, `AddressBookStub`)
 - [x] opdracht f (run `NameServer`, run `AddressBookServer`, run `AddressBookClient`)
 
@@ -25,7 +25,7 @@ Lasse
 
 Lasse
 
-- [ ] verslag verschil WCF en RMI
+- [x] verslag verschil WCF en RMI
 
 # Week 2
 
@@ -47,16 +47,16 @@ Lasse
 
 - [x] opdracht a (`javabank_create_script.sql`)
 - [x] opdracht b (project `javabank`, `WebServices/JavaBank`)
-- [ ] opdracht c
+- [x] opdracht c (`zie DBHandlerAccount methode updateTransaction`)
 - [ ] opdracht d
 
 ## Opgave 3
 
 Lasse
 
-- [ ] opdracht a
-- [ ] opdracht b
-- [ ] opdracht c
+- [ ] opdracht a (document)
+- [ ] opdracht b (document)
+- [ ] opdracht c (document)
 
 ## Opgave 4
 
@@ -83,9 +83,9 @@ Andre
 ## Opgave 2
 
 - [ ] opdracht a (GBA.zip)
-- [ ] opdracht b 
-- [ ] opdracht c 
-- [ ] opdracht d 
+- [ ] opdracht b
+- [ ] opdracht c
+- [ ] opdracht d
 
 ## Opgave 3
 
@@ -137,5 +137,3 @@ Andre
 - [ ] opdracht b
 - [ ] opdracht c
 - [ ] opdracht d
-
-
