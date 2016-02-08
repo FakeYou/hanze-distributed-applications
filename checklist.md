@@ -112,16 +112,16 @@ Andre
 
 Andre
 
-- [ ] opdracht a
-- [ ] opdracht b
-- [ ] opdracht c
-- [ ] opdracht d
-- [ ] opdracht e
-- [ ] opdracht f
-- [ ] opdracht g
-- [ ] opdracht h
-- [ ] opdracht i
-- [ ] opdracht j
+- [x] opdracht a
+- [x] opdracht b
+- [x] opdracht c
+- [x] opdracht d
+- [x] opdracht e
+- [x] opdracht f
+- [x] opdracht g
+- [x] opdracht h
+- [x] opdracht i
+- [x] opdracht j
 
 ## Opgave 6
 
