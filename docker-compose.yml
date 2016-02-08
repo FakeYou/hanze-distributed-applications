@@ -1,0 +1,17 @@
+mysql:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: toor
+  expose:
+    - 3306
+  ports:
+    - 3306:3306
+  volumes:
+   - ./sql:/docker-entrypoint-initdb.d
+
+glassfish:
+  image: tutum/glassfish 
+  ports:
+    - 8080:8080
+    - 4848:4848
+    - 8181:8181

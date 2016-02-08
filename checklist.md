@@ -82,10 +82,10 @@ Andre
 
 ## Opgave 2
 
-- [ ] opdracht a (GBA.zip)
-- [ ] opdracht b
-- [ ] opdracht c
-- [ ] opdracht d
+- [x] opdracht a (GBA.zip)
+- [x] opdracht b
+- [x] opdracht c
+- [x] opdracht d (http://localhost:8080/GBA_war_exploded/natuurlijkpersoon?action=get&bsn=128376874681)
 
 ## Opgave 3
 
