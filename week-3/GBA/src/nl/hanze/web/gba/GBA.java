@@ -28,7 +28,24 @@ public class GBA extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = readAction(request);
+        String bsn = request.getParameter("bsn");
+        String geslacht = request.getParameter("bsn");
+        String nummer = request.getParameter("bsn");
+        String initialen = request.getParameter("bsn");
+        String achternaam = request.getParameter("bsn");
+        String postcode = request.getParameter("bsn");
+        String woonplaats = request.getParameter("bsn");
 
+        if ("post".equals(action) && bsn != null && geslacht != null && initialen != null && achternaam != null && postcode != null && woonplaats != null && nummer != null) {
+            NatuurlijkPersoonDAOImpl impl = new NatuurlijkPersoonDAOImpl();
+            int row = impl.addNatuurlijkPersoon(Long.parseLong(bsn), geslacht,  initialen, achternaam, Integer.parseInt(nummer), postcode, woonplaats);
+
+            // return json format
+//            request.setAttribute("row", row);
+//            RequestDispatcher view=request.getRequestDispatcher("post.jsp");
+//            view.forward(request, response);
+        }
     }
 
     private String readAction(HttpServletRequest request) {

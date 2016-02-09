@@ -31,4 +31,20 @@ public class NatuurlijkPersoonDAOImpl implements NatuurlijkPersoonDAO {
 
         return natuurlijkPersoon;
     }
+
+    @Override
+    public int addNatuurlijkPersoon(long bsn, String geslacht, String initialen, String achternaam, int nummer, String postcode, String woonplaats) {
+        int row = -1;
+
+        String query = String.format("INSERT INTO `GBA` (`natuurlijkpersonen`) VALUES (bsn=%s, geslacht=%s, initialen=%s,  achternaam=%s,  nummer=%s,  postcode=%s,  woonplaats=%s )", bsn, geslacht,
+                initialen, achternaam, nummer, postcode, woonplaats);
+
+        System.out.println(query);
+
+        DBHandler dbHandler = new DBHandler();
+
+        row = dbHandler.add(query);
+        System.out.println(row);
+        return row;
+    }
 }

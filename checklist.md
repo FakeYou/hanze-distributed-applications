@@ -54,9 +54,9 @@ Lasse
 
 Lasse
 
-- [ ] opdracht a (document)
-- [ ] opdracht b (document)
-- [ ] opdracht c (document)
+- [x] opdracht a (document)
+- [x] opdracht b (document)
+- [x] opdracht c (document)
 
 ## Opgave 4
 
@@ -75,7 +75,7 @@ Andre
 
 Andre
 
-- [ ] opdracht a (document)
+- [x] opdracht a (document)
 - [ ] opdracht b
 - [ ] opdracht c
 - [ ] opdracht d
@@ -91,13 +91,13 @@ Andre
 
 Lasse
 
-- [ ] opdracht a (document)
-- [ ] opdracht b
-- [ ] opdracht c
-- [ ] opdracht d
-- [ ] opdracht e
-- [ ] opdracht f
-- [ ] opdracht g (code)
+- [x] opdracht a (document)
+- [x] opdracht b
+- [x] opdracht c
+- [x] opdracht d
+- [x] opdracht e
+- [x] opdracht f
+- [x] opdracht g (code)
 - [ ] opdracht h (code)
 - [ ] opdracht i (code)
 
@@ -125,7 +125,7 @@ Andre
 
 ## Opgave 6
 
-- [ ] opdracht a
+- [x] opdracht a
 - [ ] opdracht b
 - [ ] opdracht c
 - [ ] opdracht d
@@ -133,7 +133,7 @@ Andre
 
 ## Opgave 7
 
-- [ ] opdracht a
-- [ ] opdracht b
-- [ ] opdracht c
-- [ ] opdracht d
+- [x] opdracht a
+- [x] opdracht b
+- [x] opdracht c
+- [x] opdracht d
